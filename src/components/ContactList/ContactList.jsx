@@ -1,16 +1,29 @@
 import css from './ContactList.module.css';
 
-import Contact from './Contact/Contact';
+import Contact from '../Contact/Contact';
 
 const ContactList = ({ dataInfo, onDelete }) => {
   return (
-    <ul className={css.contactList}>
+    <>
       {dataInfo.length > 0 ? (
-        <Contact dataInfo={dataInfo} onDelete={onDelete} />
+        <ul className={css.contactList}>
+          {dataInfo.map(({ id, name, number }) => {
+            return (
+              <li key={id}>
+                <Contact
+                  id={id}
+                  name={name}
+                  number={number}
+                  onDelete={onDelete}
+                />
+              </li>
+            );
+          })}
+        </ul>
       ) : (
-        'List is empty'
+        <p className={css.emptyList}>List is empty</p>
       )}
-    </ul>
+    </>
   );
 };
 
